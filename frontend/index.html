@@ -49,7 +49,7 @@
 
       try {
         const res = await fetch(
-          "https://backend.kabaw ang.workers.dev/?q=" + encodeURIComponent(q)
+          "https://backend.kabawang.workers.dev/?q=" + encodeURIComponent(q)
         );
         const data = await res.json();
         out.textContent = JSON.stringify(data, null, 2);
