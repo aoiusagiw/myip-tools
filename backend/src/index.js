@@ -29,10 +29,14 @@ export default {
       prefix: bgp?.data?.prefixes?.[0]?.prefix || null
     };
 
-    return new Response(JSON.stringify(result, null, 2), {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+	return new Response(JSON.stringify(result, null, 2), {
+  	headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type"
+  }
+});
+
   }
 };
