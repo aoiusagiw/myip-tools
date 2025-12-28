@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <title>IP 一鍵查詢</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 40px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    pre {
+      margin-top: 20px;
+      background: #000;
+      padding: 15px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>IP / 域名 一鍵查詢</h2>
+
+  <input id="q" placeholder="輸入 IP 或域名，例如 8.8.8.8" />
+  <button onclick="lookup()">查詢</button>
+
+  <pre id="out">等待查詢...</pre>
+
+  <script>
+    async function lookup() {
+      const q = document.getElementById("q").value.trim();
+      const out = document.getElementById("out");
+
+      if (!q) {
+        out.textContent = "請先輸入 IP 或域名";
+        return;
+      }
+
+      out.textContent = "查詢中...";
+
+      try {
+        const res = await fetch(
+          "https://backend.kabaw ang.workers.dev/?q=" + encodeURIComponent(q)
+        );
+        const data = await res.json();
+        out.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        out.textContent = "查詢失敗：" + e.message;
+      }
+    }
+  </script>
+
+</body>
+</html>
